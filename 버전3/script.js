@@ -75,6 +75,68 @@ function mockGeminiResponse(prompt) {
         return JSON.stringify(fortunes[Math.floor(Math.random() * fortunes.length)]);
     }
     
+    // --- 2.1.5 Travel Tip Mock: 여행 팁 요청에서는 "2.3 Nagging Mock"을 사용하지 않고
+    // 지역별 팁 또는 일반 팁(문장)만 반환하도록 처리
+    if (/travel tip|여행 팁|Give 1 short travel tip|AI Tip|AI 팁|Task: Give 1 short travel tip/i.test(prompt)) {
+        const p = prompt.toLowerCase();
+
+        const generalTips = [
+            "현지인만 아는 골목 맛집을 찾으려면 구글맵 평점 4.0 이상만 보세요! 🍜",
+            "돈키호테 쇼핑은 아침 일찍 가야 계산 줄을 안 섭니다. 🛍️",
+            "편의점 오뎅은 겨울 일본 여행의 낭만이자 최고의 야식입니다. 🍢",
+            "숙소 근처 목욕탕(센토)을 찾아보세요. 피로가 싹 풀립니다. ♨️",
+            "택시비가 비싸니 막차 시간은 꼭 미리 확인하세요! 🚕",
+            "JR 패스 대신 지역 패스가 더 저렴할 수 있으니 일정을 먼저 확인하세요. 🚆"
+        ];
+
+        if (p.includes('도쿄') || p.includes('tokyo')) {
+            const tokyoTips = [
+                "시부야 스카이는 꼭 해질녘에 예약하세요. 야경이 정말 멋집니다. 🌇",
+                "아사쿠사 센소지는 새벽 6시에 가면 사람 없이 인생샷 가능합니다. 📸",
+                "도쿄 지하철 패스(72시간)는 교통비 절감에 도움됩니다. 🚇"
+            ];
+            return tokyoTips[Math.floor(Math.random() * tokyoTips.length)];
+        }
+
+        if (p.includes('오사카') || p.includes('osaka')) {
+            const osakaTips = [
+                "유니버셜 스튜디오 닌텐도 월드는 오픈런이 유리하니 티켓과 시간표를 미리 확인하세요. 🍄",
+                "도톤보리에서는 골목 식당을 노려보세요—현지인 맛집이 숨어있습니다. 🍡",
+                "오사카 주유패스로 주요 관광지를 효율적으로 돌 수 있습니다. 🎫"
+            ];
+            return osakaTips[Math.floor(Math.random() * osakaTips.length)];
+        }
+
+        if (p.includes('교토') || p.includes('kyoto')) {
+            const kyotoTips = [
+                "아라시야마 대나무 숲은 이른 아침에 가야 고요한 풍경을 즐길 수 있어요. 🎋",
+                "기요미즈데라 주변 산넨자카는 사진 찍기 좋은 골목이 많습니다. 📷",
+                "교토에서는 지하철+버스 조합 패스를 고려하세요. 🚌"
+            ];
+            return kyotoTips[Math.floor(Math.random() * kyotoTips.length)];
+        }
+
+        if (p.includes('삿포로') || p.includes('sapporo') || p.includes('훗카이도')) {
+            const sapporoTips = [
+                "삿포로 맥주 박물관의 생맥주 시음은 매우 인기가 많습니다—시간을 비워두세요. 🍺",
+                "겨울에는 눈 축제 일정과 교통편을 미리 예약하세요. ❄️",
+                "홋카이도는 렌터카로 돌아다니면 코스가 훨씬 편리합니다. 🚗"
+            ];
+            return sapporoTips[Math.floor(Math.random() * sapporoTips.length)];
+        }
+
+        if (p.includes('후쿠오카') || p.includes('fukuoka')) {
+            const fukuokaTips = [
+                "후쿠오카의 야타이(포장마차)는 현지 분위기를 느끼기 좋은 장소입니다. 🍢",
+                "라멘은 지역마다 스타일이 다르니 한 그릇씩 도전해보세요. 🍜",
+                "나카스 지역은 저녁에 분위기가 좋아 산책하기 좋습니다. 🌃"
+            ];
+            return fukuokaTips[Math.floor(Math.random() * fukuokaTips.length)];
+        }
+
+        // 도시가 특정되지 않았을 때는 일반 팁 반환
+        return generalTips[Math.floor(Math.random() * generalTips.length)];
+    }
     // --- 2.2 Bucket List Mock (스마트 키워드 인식: 15종 이상) ---
     if (prompt.includes("bucket list")) {
         // 프롬프트에서 '여행 팁'을 요청한 도시명을 추출 (단순 포함 여부 확인)
