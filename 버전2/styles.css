@@ -1,0 +1,67 @@
+/* 니혼톡 설날 대피소 스타일 시트
+   작성자: NihonTalk Design Team
+*/
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #fdfbf7;
+    color: #1f2937;
+}
+
+.serif {
+    font-family: 'Noto Serif KR', serif;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.nagging-bubble {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.nagging-bubble:hover {
+    transform: scale(1.02);
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.typing-loader::after {
+    content: '...';
+    animation: typing 1.5s steps(4, end) infinite;
+}
+
+@keyframes typing {
+    0%, 100% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+}
+
+/* Admin Modal */
+#admin-modal {
+    backdrop-filter: blur(5px);
+}
